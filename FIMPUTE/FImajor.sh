@@ -135,8 +135,7 @@ cd ${FOLDER}
 
 echo " "
 echo "****    Data processing for imputation started     ****"
-Allelecode_ref=$(awk '{print $6}' ../${ref}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
-
+Allelecode_ref=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
 #####  REFERENCE  #######
 if [ $Allelecode_ref = 12 ]; then
  cat ../${ref}.bim | awk '{print $2,2}' > recodeallele.txt
@@ -164,7 +163,7 @@ awk 'BEGIN {FS=" ";OFS=""} {$1=$1; print}' |
 paste -d' ' IDs_sons.txt - > Fimpsons.geno
 echo 'IID Chip Call.........' > header
 cat header Fimpsons.geno > $outref.geno
-cat ../${ref}.bim | awk '{print $2,$1,$4,NR}' > tmp
+cat ../${ref}.bim | awk '{print $2,$1,$4,NR}' > tmpawk
 echo 'SNP_ID Chr Pos Chip1' > chipheader
 cat chipheader tmp > $outref.snpinfo
 
@@ -173,7 +172,7 @@ rm ref_upd.*
 
 
 ##### VALIDATION  #######
-Allelecode_val=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
+Allelecode_val=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
 
 if [ $Allelecode_val = 12 ]; then
 cat ../${val}.bim | awk '{print $2,2}' > recodeallele.txt
