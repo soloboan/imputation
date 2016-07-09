@@ -1,0 +1,74 @@
+#******************************************************************#
+#                  Parameter file description                      #
+#                       for runing FIMPUTE                         #
+#******************************************************************#
+
+### NOTE -- VERY IMPORTANT
+There are two bash scripts
+
+A.
+*******  FIminor.sh  *******    
+  This is to run minor imputation on a (one) dataset 
+  with few markers missing for some few individuals
+
+B. 
+******  FImajor.sh ******
+  This is to run major imputation on two different SNP chips
+  Eg. Impute 50k to HD or 7k to 50k etc
+
+C.
+To ask for how to run any of the script just type:
+FIminor.sh help or FImajor.sh
+The parameters needed to run the script will be print out
+** Look at how to run the example file check the file "run_example.txt"
+
+############################################################################
+running ./FIminor.sh script to undertake MINOR imputation with FIMPUTE
+5 Arguments are needed to run ./FIminor.sh script
+
+*** Arguments *****
+1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)
+2. output name of Reference file
+3. Output name of final file after imputation
+4. Output genotype format (either plink or genotypes format)
+5. Pedigree information (Optional -- with Progeny, Sire, Dam, Sex)
+** The final out is a plink binary file with its prefix as argument and _imp 
+
+************************************************************************************
+runing the Example file
+************************************************************************************
+# without Pedigree information
+./FIminor.sh Example/ex01_ref ref resultsREF plink
+
+# with Pedigree information
+./FIminor.sh Example/ex01_ref ref resultsREF plink Example/ex01.dat
+
+OUTPUT will have names -- resultsREF_imp.bim; resultsREF_imp.bed; resultsREF_imp.fam;
+*************************************************************************************
+
+** running ./FImajor.sh script to undertake MAJOR imputation with FIMPUTE ***#
+8 Arguments are needed to run ./FImajor.sh script
+
+******    Arguments    ********
+1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)
+2. output name of Reference file
+3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)
+4. output name of file to be imputed
+5. Output name of final file after imputation
+6. where R is located
+7. Output genotype format (either plink or genotype format)
+8. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex)
+** The final out is a plink binary file with its prefix as argument and _imp
+
+**********************************************************************************
+runing the example file
+**********************************************************************************
+
+# without Pedigree information
+./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink
+
+# with Pedigree information 
+./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink Example/ex01.dat
+
+OUTPUT will have names -- imp7kto50k_imp.bim; imp7kto50k_imp.bed; imp7kto50k_imp.fam;
+**************************************************************************************************

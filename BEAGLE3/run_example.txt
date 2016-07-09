@@ -1,0 +1,44 @@
+########## Preamble ################################################################
+# The Example folder contains a simulated population in a PLINK binary file format
+#    files:- ex01.fam; ex01.bim; ex01.bed
+# The total number of individuals are 225 with 26100 SNPs on 31 chromosomes
+
+# Three different subsets of the data is made
+#  subset 1: ex01_ref.fam; ex01_ref.bim; ex01_ref.bed
+#    which consist of 180 individuals. It is used in this context as the reference population
+
+#  subset 2: ex01_valldchip.fam; ex01_valldchip.bim; ex01_valldchip.bed
+#    which consist of 45 individuals and  5328 SNPs on 31 chromosomes
+
+#  subset 3: ex01_val.fam; ex01_val.bim; ex01_val.bed
+#    which consist of 45 individuals.
+#      It is the true genotypes of the imputed population with all the SNPs 26100 SNPs
+
+#############################################################################################
+
+
+### running the Example file for MINOR imputation
+*******************************************************************
+#for one chromosomes
+./BGLv3minor.sh Example/ex01_ref ex01ref resultsREF 1 1
+
+#for a range of chromosomes
+./BGLv3minor.sh Example/ex01_ref ex01ref resultsREF 25 29
+
+#for all chromosomes
+./BGLv3minor Example/ex01_ref ex01ref resultsREF 1 29
+
+********************************************************************
+
+
+### running the Example file for MAJOR imputation
+*******************************************************************
+#for one chromosomes
+./BGLv3major.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 25 25
+
+#for a range of chromosomes
+./BGLv3major.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 1 2
+
+#for all chromosomes
+./BGLv3major.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 1 29 
+********************************************************************
