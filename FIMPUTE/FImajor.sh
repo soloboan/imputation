@@ -135,7 +135,9 @@ cd ${FOLDER}
 
 echo " "
 echo "****    Data processing for imputation started     ****"
-Allelecode_ref=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
+#Allelecode_ref=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
+
+Allelecode_ref=$(echo '12')
 #####  REFERENCE  #######
 if [ $Allelecode_ref = 12 ]; then
  cat ../${ref}.bim | awk '{print $2,2}' > recodeallele.txt
@@ -172,7 +174,8 @@ rm ref_upd.*
 
 
 ##### VALIDATION  #######
-Allelecode_val=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
+#Allelecode_val=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
+Allelecode_val=$(echo '12')
 
 if [ $Allelecode_val = 12 ]; then
 cat ../${val}.bim | awk '{print $2,2}' > recodeallele.txt
