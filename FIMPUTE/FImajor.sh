@@ -165,7 +165,7 @@ awk 'BEGIN {FS=" ";OFS=""} {$1=$1; print}' |
 paste -d' ' IDs_sons.txt - > Fimpsons.geno
 echo 'IID Chip Call.........' > header
 cat header Fimpsons.geno > $outref.geno
-cat ../${ref}.bim | awk '{print $2,$1,$4,NR}' > tmpawk
+cat ../${ref}.bim | awk '{print $2,$1,$4,NR}' > tmp
 echo 'SNP_ID Chr Pos Chip1' > chipheader
 cat chipheader tmp > $outref.snpinfo
 
