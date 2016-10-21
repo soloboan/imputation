@@ -175,7 +175,7 @@ do
 ./plink2 --silent --cow --nonfounders --bfile ${outref}_allelicUpd --chr $i --recode transpose --out tmpref
 echo " "
 echo " "
-echo "Number of markers and samples for chromosome ...... "$i "Referece SNP panel"
+echo "Number of markers and samples for chromosome ...... "$i "Reference SNP panel"
 #### generating the beagle 3 format
 cat tmpref.tfam | awk '{print $2,$2}' | tr '\n' ' ' | awk '{print "I","sampleID",$0}' > headers
 cat tmpref.tped | cut -d' ' -f2,5- | awk '{print "M",$0}' > gtypes
