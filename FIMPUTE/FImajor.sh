@@ -50,24 +50,24 @@ mv plink2\?dl\=0 plink2
 chmod +x plink2
 fi
 
-if [ ! -f plink ]; then
- echo "plink was not found in the current directory, thus it been download"
- echo " "
- wget http://pngu.mgh.harvard.edu/~purcell/plink/dist/plink-1.07-x86_64.zip
- unzip plink-1.07-x86_64.zip
- cp plink-1.07-x86_64/plink .
- ./plink --noweb --silent --file plink-1.07-x86_64/test 
- rm -r plink-1.07-x86_64*
- if [ ! -f plink.log ]; then
-  wget http://pngu.mgh.harvard.edu/~purcell/plink/dist/plink-1.07-i686.zip
-  unzip plink-1.07-i686.zip
-  cp plink-1.07-i686/plink .
-  rm -r plink-1.07-i686*
-  echo " "
- fi
-rm plink.log
-echo " "
-fi
+#if [ ! -f plink ]; then
+# echo "plink was not found in the current directory, thus it been download"
+# echo " "
+# wget http://pngu.mgh.harvard.edu/~purcell/plink/dist/plink-1.07-x86_64.zip
+# unzip plink-1.07-x86_64.zip
+# cp plink-1.07-x86_64/plink .
+# ./plink --noweb --silent --file plink-1.07-x86_64/test 
+# rm -r plink-1.07-x86_64*
+# if [ ! -f plink.log ]; then
+#  wget http://pngu.mgh.harvard.edu/~purcell/plink/dist/plink-1.07-i686.zip
+#  unzip plink-1.07-i686.zip
+# cp plink-1.07-i686/plink .
+#  rm -r plink-1.07-i686*
+#  echo " "
+# fi
+#rm plink.log
+#echo " "
+#fi
 
 # Download FImpute from the web if not available
 if [ ! -f FImpute ]; then
@@ -128,7 +128,7 @@ fi
 # Create temporary folder for analysis
 FOLDER=tmp$RANDOM
 mkdir ${FOLDER}
-cp FImpute plink plink2 FIm*.sh ${FOLDER}/.
+cp FImpute plink2 FIm*.sh ${FOLDER}/.
 cd ${FOLDER}
 #################################################
 
@@ -142,13 +142,13 @@ Allelecode_ref=$(echo '12')
 if [ $Allelecode_ref = 12 ]; then
  cat ../${ref}.bim | awk '{print $2,2}' > recodeallele.txt
  ./plink2 --silent --cow --nonfounders --bfile ../${ref} --make-bed --out ref_upd
- ./plink --silent --cow --noweb --nonfounders --bfile ref_upd --recodeA --recode-allele recodeallele.txt --out geno
+ ./plink2 --silent --cow --noweb --nonfounders --bfile ref_upd --recode A --recode-allele recodeallele.txt --out geno
 rm recodeallele.txt
 elif [ $Allelecode_ref = AB ]; then
  cat ../${ref}.bim | awk '{print $2,"A","B",1,2}' > alleleupdate.txt
  ./plink2 --silent --cow --nonfounders --bfile ../${ref} --update-alleles alleleupdate.txt --make-bed --out ref_upd
  cat ref_upd.bim | awk '{print $2,2}' > recodeallele.txt
- ./plink --silent --cow --noweb --nonfounders --bfile ref_upd --recodeA --recode-allele recodeallele.txt --out geno
+ ./plink2 --silent --cow --noweb --nonfounders --bfile ref_upd --recode A --recode-allele recodeallele.txt --out geno
 rm recodeallele.txt alleleupdate.txt
 elif [ $Allelecode_ref = ACGT ]; then
  echo "ACGT format is not allowed -- Please use an AB coding or 12"
@@ -180,13 +180,13 @@ Allelecode_val=$(echo '12')
 if [ $Allelecode_val = 12 ]; then
 cat ../${val}.bim | awk '{print $2,2}' > recodeallele.txt
  ./plink2 --silent --cow --nonfounders --bfile ../${val} --make-bed --out val_upd
- ./plink --silent --cow --noweb --nonfounders --bfile val_upd --recodeA --recode-allele recodeallele.txt --out geno
+ ./plink2 --silent --cow --noweb --nonfounders --bfile val_upd --recode A --recode-allele recodeallele.txt --out geno
 rm recodeallele.txt
 elif [ $Allelecode_val = AB ]; then
  cat ../${val}.bim | awk '{print $2,"A","B",1,2}' > alleleupdate.txt
  ./plink2 --silent --cow --nonfounders --bfile ../${val} --update-alleles alleleupdate.txt --make-bed --out val_upd
  cat val_upd.bim | awk '{print $2,2}' > recodeallele.txt
- ./plink --silent --cow --noweb --nonfounders --bfile val_upd --recodeA --recode-allele recodeallele.txt --out geno
+ ./plink2 --silent --cow --noweb --nonfounders --bfile val_upd --recode A --recode-allele recodeallele.txt --out geno
 rm recodeallele.txt alleleupdate.txt
 elif [ $Allelecode_val = ACGT ]; then
  echo "ACGT format is not allowed -- Please use an AB coding or 12"
@@ -385,7 +385,7 @@ fi
 
 fi
 rm *.snpinfo *.ctr *.geno
-rm plink FImpute
+rm plink2 FImpute
 
 cp -r * ../.
 cd ..
