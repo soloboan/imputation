@@ -87,8 +87,8 @@ fi
 #####
 
 ## checking allele codes
-Allelecode=$(awk '{print $6}' ../${ref}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
-
+#Allelecode=$(awk '{print $6}' ../${ref}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
+Allelecode=$(echo '12')
 ###################################################################################
 echo 'Data Preparation started for ........ imputation with BEAGLE Version 3'
 if [ $Allelecode = ACGT ]; then
