@@ -41,7 +41,7 @@ echo " "
 fi
 
 # Download beagle from the web if not available
-if [ ! -f beagle4new.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
+if [ ! -f beagle4n1.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
  echo "Beagle files were not found in the current directory, Downloading them ................"
  echo " "
  wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
