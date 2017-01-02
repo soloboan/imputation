@@ -42,24 +42,27 @@ fi
 
 # Download beagle from the web if not available
 if [ ! -f beagle4n1.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
- echo "Beagle files were not found in the current directory, Downloading them ................"
- echo " "
- wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
- tar -zxvf beagle4_files.tar.gz?dl=0
- cp beagle4_files/*.jar .
- rm -r beagle4_files*
+ #echo "Beagle files were not found in the current directory, Downloading them ................"
+ echo " Please download beagle version 4.1 "
+ #wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
+ #tar -zxvf beagle4_files.tar.gz?dl=0
+ #cp beagle4_files/*.jar .
+ #rm -r beagle4_files*
+ exit
 fi
 
 ###################################################################
 # # Download PLINK from the web if not available
 if [ ! -f plink2 ]; then
-wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
-mv plink2\?dl\=0 plink2
-chmod +x plink2
+#wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
+#mv plink2\?dl\=0 plink2
+#chmod +x plink2
+ echo " Please download plink version 2 and save the binary file as 'plink2' "
+ exit
 fi
 
 #### Checking if beagle 4 jar file is available
-if [ ! -f beagle4new.jar ]; then
+if [ ! -f beagle4n1.jar ]; then
  echo "  Beagle jar file is not available -- Place beagle4new.jar in this folder  "
  echo " "
  echo " "
