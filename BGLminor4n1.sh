@@ -36,25 +36,28 @@ if [ ${ref} = help ]; then
 fi
 
 # Download beagle from the web if not available
-if [ ! -f beagle4.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ]; then
- echo "Beagle files were not found in the current directory, Downloading them ................"
- echo " "
- wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
- tar -zxvf beagle4_files.tar.gz?dl=0
- cp beagle4_files/*.jar .
- rm -r beagle4_files*
+if [ ! -f beagle4n1.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
+ #echo "Beagle files were not found in the current directory, Downloading them ................"
+ echo " Please download beagle version 4.1 "
+ #wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
+ #tar -zxvf beagle4_files.tar.gz?dl=0
+ #cp beagle4_files/*.jar .
+ #rm -r beagle4_files*
+ exit
 fi
 
 ###################################################################
 # # Download PLINK from the web if not available
 if [ ! -f plink2 ]; then
-wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
-mv plink2\?dl\=0 plink2
-chmod +x plink2
+#wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
+#mv plink2\?dl\=0 plink2
+#chmod +x plink2
+ echo " Please download plink version 2 and save the binary file as 'plink2' "
+ exit
 fi
 
 #### Checking if beagle 4 jar file is available
-if [ ! -f beagle4.jar ]; then
+if [ ! -f beagle4n1.jar ]; then
  echo "  Beagle jar file is not available -- Place beagle4.jar in this folder  "
  echo " "
  echo " "
@@ -164,15 +167,8 @@ echo "*******                                                     ********"
 echo "********************************************************************"
 
 nloci=$(awk 'END {print NR}' ${outref}chr$i.snplist)
-if [ $nloci -le 50000 ]; then
-#**** REF
- java -jar beagle2vcf.jar $i ${outref}chr$i.snplist ${outref}_chr$i.bgl 0 > ${outref}chr$i.vcf
- java -jar beagle4.jar gt=${outref}chr$i.vcf nsamples=10 burnin-its=10 phase-its=30 impute-its=30 out=${finaloutfile}chr$i.phased
-elif [ $nloci -gt 50000 ]; then
-#**** REF
- java -jar beagle2vcf.jar $i ${outref}chr$i.snplist ${outref}_chr$i.bgl 0 > ${outref}chr$i.vcf
- java -jar beagle4.jar gt=${outref}chr$i.vcf window=$nloci nsamples=10 burnin-its=10 phase-its=30 impute-its=30 out=${finaloutfile}chr$i.phased
-fi
+java -jar beagle2vcf.jar $i ${outref}chr$i.snplist ${outref}_chr$i.bgl 0 > ${outref}chr$i.vcf
+java -jar beagle4n1.jar gt=${outref}chr$i.vcf nthreads=10 niterations=50 window=20000 overlap=5000 ne=300 gprobs=true out=${finaloutfile}chr$i.phased
 
 if [ ! -f ${finaloutfile}chr$i.phased.vcf.gz ]; then
  echo " Imputation with BEAGLE v4 aborted  "
@@ -243,12 +239,12 @@ elif [ ! $chrend -eq $chrst ]; then
  bed=$(awk 'NR<2 {print $1}' list)
  bim=$(awk 'NR<2 {print $2}' list)
  fam=$(awk 'NR<2 {print $3}' list)
- ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out ../${finaloutfile}_imp
- ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile ../${finaloutfile}_imp --make-bed --out ../${finaloutfile}_imp
+ ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out imp
+ ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile imp --make-bed --out ../${finaloutfile}_imp
 fi
 
 #####################################
-rm -r list bed fam bim merglist.txt *.log *.nosex
+rm -r list bed fam bim merglist.txt *.log *.nosex imp.*
 cd ..
 rm *.nosex *.log *.jar
 cd ..
