@@ -235,6 +235,7 @@ if [ ! -f ${outref}chr$i.phased.vcf.gz ]; then
  exit
 fi
  echo " "
+ echo '************************************************************************'
  echo "*********         Imputing lower denisty SNP panel              ********"
  echo "*********            chromosome' $i '...started !!!             ********"
  echo "************************************************************************"
@@ -314,12 +315,12 @@ elif [ ! $chrend -eq $chrst ]; then
  bed=$(awk 'NR<2 {print $1}' list)
  bim=$(awk 'NR<2 {print $2}' list)
  fam=$(awk 'NR<2 {print $3}' list)
- ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out ../${finaloutfile}_imp
- ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile ../${finaloutfile}_imp --make-bed --out ../${finaloutfile}_imp
+ ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out imp
+ ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile imp --make-bed --out ../${finaloutfile}_imp
 fi
 
 ########################################
-rm list bed fam bim merglist.txt *.nosex *.log
+rm list bed fam bim merglist.txt *.nosex *.log imp.*
 cd ..
 rm *.nosex plink2 *.log *.jar
 cd ..
