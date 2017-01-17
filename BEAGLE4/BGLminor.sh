@@ -30,7 +30,8 @@ if [ ${ref} = help ]; then
        2. output name of Reference file
        3. Output name of final file after imputation
        4. start of chromosome
-       5. End of chromosome"
+       5. End of chromosome
+       6. The allele codes in your data (12, AB) [ACGT is not accepted] "
  echo " "
  echo " "
  exit
