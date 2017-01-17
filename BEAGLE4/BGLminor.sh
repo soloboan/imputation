@@ -5,6 +5,7 @@ outref=$2
 finaloutfile=$3
 chrst=$4
 chrend=$5
+Allelecode=$6
 ###############################
 echo " "
 echo " "
@@ -37,20 +38,16 @@ fi
 
 # Download beagle from the web if not available
 if [ ! -f beagle4.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ]; then
- echo "Beagle files were not found in the current directory, Downloading them ................"
- echo " "
- wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
- tar -zxvf beagle4_files.tar.gz?dl=0
- cp beagle4_files/*.jar .
- rm -r beagle4_files*
+ echo "Beagle files were not found in the current directory, Download it from https://faculty.washington.edu/browning/beagle/b4_0.html ................"
+ echo " Please download beagle version 4 "
+ echo " rename the jar file to beagle4.jar "
 fi
 
 ###################################################################
 # # Download PLINK from the web if not available
 if [ ! -f plink2 ]; then
-wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
-mv plink2\?dl\=0 plink2
-chmod +x plink2
+echo " Please download Plink version 2 (or 1.9) "
+echo ' Please rename the plink file to plink2 '
 fi
 
 #### Checking if beagle 4 jar file is available
@@ -111,7 +108,7 @@ fi
 
 ## check the allele code
 #Allelecode=$(awk '{print $6}' ../${ref}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
-Allelecode=$(echo '12')
+Allelecode=$(echo ${Allelecode})
 #####################################################################
 echo 'Data Preparation started for ........ BEAGLE Version 4'
 if [ $Allelecode = 12 ]; then
@@ -243,8 +240,9 @@ elif [ ! $chrend -eq $chrst ]; then
  bed=$(awk 'NR<2 {print $1}' list)
  bim=$(awk 'NR<2 {print $2}' list)
  fam=$(awk 'NR<2 {print $3}' list)
- ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out ../${finaloutfile}_imp
- ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile ../${finaloutfile}_imp --make-bed --out ../${finaloutfile}_imp
+ ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out imp
+ ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile imp --make-bed --out ../${finaloutfile}_imp
+ rm imp.*
 fi
 
 #####################################
