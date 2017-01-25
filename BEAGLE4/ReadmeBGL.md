@@ -1,4 +1,4 @@
-# Readme file for running FImpute BEAGLE VERSION 4.1 
+# Readme file for running BEAGLE VERSION 4.1 
   note: that version 4 and 4.1 are different. Read from https://faculty.washington.edu/browning/beagle/beagle.html
 
 ## There are two bash scripts  
