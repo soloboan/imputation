@@ -24,14 +24,15 @@ The parameters needed to run the script will be print out
 
 ############################################################################
 running ./FIminor.sh script to undertake MINOR imputation with FIMPUTE
-5 Arguments are needed to run ./FIminor.sh script
+6 Arguments are needed to run ./FIminor.sh script
 
 *** Arguments *****
 1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)
 2. output name of Reference file
 3. Output name of final file after imputation
 4. Output genotype format (either plink or genotypes format)
-5. Pedigree information (Optional -- with Progeny, Sire, Dam, Sex)
+5. Allelecodes - if your data is 11/12/22 then use 12; if AA/AB/BB use AB.
+6. Pedigree information (Optional -- with Progeny, Sire, Dam, Sex [M,F])
 ** The final out is a plink binary file with its prefix as argument and _imp 
 
 ************************************************************************************
@@ -47,7 +48,7 @@ OUTPUT will have names -- resultsREF_imp.bim; resultsREF_imp.bed; resultsREF_imp
 *************************************************************************************
 
 ** running ./FImajor.sh script to undertake MAJOR imputation with FIMPUTE ***#
-8 Arguments are needed to run ./FImajor.sh script
+9 Arguments are needed to run ./FImajor.sh script
 
 ******    Arguments    ********
 1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)
@@ -57,7 +58,8 @@ OUTPUT will have names -- resultsREF_imp.bim; resultsREF_imp.bed; resultsREF_imp
 5. Output name of final file after imputation
 6. where R is located
 7. Output genotype format (either plink or genotype format)
-8. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex)
+8. Allelecodes - if your data is 11/12/22 then use 12; if AA/AB/BB use AB.
+9. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex [M,F])
 ** The final out is a plink binary file with its prefix as argument and _imp
 
 **********************************************************************************
