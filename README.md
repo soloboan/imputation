@@ -18,19 +18,22 @@ Get help by runing the following: (The parameters needed to run the script will 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
 ### Running the FIminor.sh script to undertake MINOR imputation with FIMPUTE 
 * 6 Arguments are needed to run FIminor.sh script  
-Arguments  
- 1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
- 2. output name of Reference file  
- 3. Output name of final file after imputation  
- 4. Output genotype format (either plink or genotypes format) 
- 5. Allelecode
- 6. Pedigree information (Optional -- with Progeny, Sire, Dam, Sex)  
-The final out is a plink binary file with its prefix as argument and _imp  
+
+       ***** Arguments ****** 
+          1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
+          2. output name of Reference file  
+          3. Output name of final file after imputation  
+          4. Output genotype format (either plink or genotypes format) 
+          5. Allelecode
+          6. Pedigree information (Optional -- with Progeny, Sire, Dam, Sex) 
+          
+          The final out is a plink binary file with its prefix as argument and _imp  
+
 
 ### Running FImajor.sh script to undertake MAJOR imputation with FIMPUTE
  * 9 Arguments are needed to run FImajor.sh script  
 
-        Arguments  
+       ***** Arguments ****** 
          1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
          2. output name of Reference file  
          3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
@@ -116,7 +119,7 @@ Get help by runing the following: (The parameters needed to run the script will 
            ********************************************************************************
                               Running the Example files
            ********************************************************************************
-              Examples for minor imputation (BGLminor.sh or BGLmajor4n1.sh)
+              1. Examples for minor imputation (BGLminor.sh or BGLminor4n1.sh)
                for one chromosome ONLY
                 ./BGLminor.sh Example/ex01_ref ex01ref resultsREF 1 1 12
 
@@ -130,19 +133,17 @@ Get help by runing the following: (The parameters needed to run the script will 
                 resultsREF_imp.bim, resultsREF_imp.bed & resultsREF_imp.fam 
                In addtion a folder with prefix interMS-summary will be generated and addiotnal results files stored
 
-##### Examples for minor imputation (BGLmajor.sh)
-###### for one chromosomes
-./BGLmajor.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 25 25
+             2. Examples for minor imputation (BGLmajor.sh or BGLmajor4n1.sh)
+               for one chromosomes
+                ./BGLmajor.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 25 25 12
 
-###### for a range of chromosomes
-./BGLmajor.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 1 2
+               for a range of chromosomes
+                 ./BGLmajor.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 1 2 12
 
-###### for all chromosomes
-./BGLmajor.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 1 29
+               for all chromosomes
+               ./BGLmajor.sh Example/ex01_ref ex01ref Example/ex01_valldchip ex01val resultsldchip 1 29 12
 
-**OUTPUT file-names**  
- * resultsldchip_imp.bim  
- * resultsldchip_imp.bed  
- * resultsldchip_imp.fam  
-In addtion a folder with prefix interMS-summary will be generated and addiotnal results files stored
+             **OUTPUT file-names**  
+               resultsldchip_imp.bim, resultsldchip_imp.bed  & resultsldchip_imp.fam  
+               In addtion a folder with prefix interMS-summary will be generated and addiotnal results files stored
 
