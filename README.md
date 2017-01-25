@@ -29,43 +29,43 @@ Arguments
 The final out is a plink binary file with its prefix as argument and _imp  
 
 ### Running FImajor.sh script to undertake MAJOR imputation with FIMPUTE
-* 9 Arguments are needed to run FImajor.sh script  
-Arguments  
- 1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
- 2. output name of Reference file  
- 3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
- 4. output name of file to be imputed  
- 5. Output name of final file after imputation  
- 6. where R is located  
- 7. Output genotype format (either plink or genotype format)
- 8. Allelecode
- 9. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex)  
-The final out is a plink binary file with its prefix as argument and _imp  
+ * 9 Arguments are needed to run FImajor.sh script  
+
+        Arguments  
+         1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
+         2. output name of Reference file  
+         3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
+         4. output name of file to be imputed  
+         5. Output name of final file after imputation  
+         6. where R is located  
+         7. Output genotype format (either plink or genotype format)
+         8. Allelecode
+         9. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex)  
+         
+         The final out is a plink binary file with its prefix as argument and _imp  
 
 
-    Runing the Example files
-    *************************************************************************************
-    Examples for minor imputation (FIminor.sh)  
-     **without Pedigree information**  
-       ./FIminor.sh Example/ex01_ref ref resultsREF plink 12 
+        Runing the Example files
+        *************************************************************************************
+           Examples for minor imputation (FIminor.sh)  
+            **without Pedigree information**  
+              ./FIminor.sh Example/ex01_ref ref resultsREF plink 12 
 
-     **with Pedigree information**  
-       ./FIminor.sh Example/ex01_ref ref resultsREF plink 12 Example/ex01.dat  
+            **with Pedigree information**  
+              ./FIminor.sh Example/ex01_ref ref resultsREF plink 12 Example/ex01.dat  
 
-     **OUTPUT file-names**  
-       resultsREF_imp.bim, resultsREF_imp.bed & resultsREF_imp.fam  
+            **OUTPUT file-names**  
+              resultsREF_imp.bim, resultsREF_imp.bed & resultsREF_imp.fam  
 
-    Examples for minor imputation (FImajor.sh)
-     **without Pedigree information**
-       ./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink
+          Examples for minor imputation (FImajor.sh)
+            **without Pedigree information**
+              ./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink 12
 
-     **with Pedigree information** 
-       ./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink 12 Example/ex01.dat
+           **with Pedigree information** 
+              ./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink 12 Example/ex01.dat
 
-     **OUTPUT file-names**  
-       imp7kto50k_imp.bim  
-       imp7kto50k_imp.bed  
-       imp7kto50k_imp.fam  
+           **OUTPUT file-names**  
+             imp7kto50k_imp.bim , imp7kto50k_imp.bed & imp7kto50k_imp.fam  
 
 
 ## imputation with BEAGLEv4
