@@ -33,10 +33,10 @@ The parameters needed to run the script will be print out
                           runing the Example file  
       ************************************************************************************  
         without Pedigree information  
-          * ./FIminor.sh Example/ex01_ref ref resultsREF plink *  
+           ./FIminor.sh Example/ex01_ref ref resultsREF plink 12  
         
         with Pedigree information  
-          * ./FIminor.sh Example/ex01_ref ref resultsREF plink Example/ex01.dat *   
+           ./FIminor.sh Example/ex01_ref ref resultsREF plink 12 Example/ex01.dat    
           
         OUTPUT file -- resultsREF_imp.bim; resultsREF_imp.bed; resultsREF_imp.fam;  
       *************************************************************************************  
@@ -62,10 +62,10 @@ The parameters needed to run the script will be print out
                               runing the example file  
         **********************************************************************************  
           without Pedigree information  
-            *./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink*  
+            ./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink 12  
             
           with Pedigree information   
-            *./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink Example/ex01.dat*  
+            ./FImajor.sh Example/ex01_ref REF Example/ex01_valldchip val resultsVAL /usr/bin/Rscript plink 12 Example/ex01.dat  
             
           OUTPUT will have names -- imp7kto50k_imp.bim; imp7kto50k_imp.bed; imp7kto50k_imp.fam;  
         **************************************************************************************************
