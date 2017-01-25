@@ -1,8 +1,8 @@
-### imputation
+# imputation
 Genotype Imputation bash script for BEAGLE v3 & v4 and FImpute software.  
 Primary the bash script uses PLINK format data and PLINK software itself to undertake most of the task.
 
-##### imputation with FImpute
+## imputation with FImpute
 **Parameter file description for runing FIMPUTE**  
 
 **NOTE -- VERY IMPORTANT**  
@@ -70,7 +70,7 @@ The final out is a plink binary file with its prefix as argument and _imp
 
 
 
-### imputation with BEAGLEv4
+## imputation with BEAGLEv4
 **Parameter file description for runing FIMPUTE**  
 
 **NOTE -- VERY IMPORTANT**  
