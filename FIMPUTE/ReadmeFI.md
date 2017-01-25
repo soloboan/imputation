@@ -1,7 +1,7 @@
 # Readme file for running FImpute  
 
 ## There are two bash scripts  
-These script could could be used for minor (sporadic missing, ungenotyped parents) and major imputation (from low density SNP panel to a high density panel)  
+These script could be used for minor (sporadic missing, ungenotyped parents) and major imputation (from low density SNP panel to a high density panel)  
 
 ### A. FIminor.sh  
   This is to run minor imputation on a (one) dataset  
@@ -27,7 +27,7 @@ The parameters needed to run the script will be print out
       5. Allelecodes - if your data is 11/12/22 then use 12; if AA/AB/BB use AB.  
       6. Pedigree information (Optional -- with Progeny, Sire, Dam, Sex [M,F])  
 
-     ### The final out is a plink binary file with its prefix as argument and _imp   
+     ### The final output is a plink binary file with its prefix as argument and _imp   
 
       ************************************************************************************  
                           runing the Example file  
@@ -55,7 +55,7 @@ The parameters needed to run the script will be print out
       8. Allelecodes - if your data is 11/12/22 then use 12; if AA/AB/BB use AB.  
       9. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex [M,F])  
       
-      ### The final out is a plink binary file with its prefix as argument and _imp  
+      ### The final output is a plink binary file with its prefix as argument and _imp  
 
 
         **********************************************************************************  
