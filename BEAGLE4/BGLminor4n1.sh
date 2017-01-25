@@ -39,28 +39,21 @@ fi
 
 # Download beagle from the web if not available
 if [ ! -f beagle4n1.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
- #echo "Beagle files were not found in the current directory, Downloading them ................"
+ echo "Beagle files were not found in the current directory ........."
  echo " Please download beagle version 4.1 "
- #wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
- #tar -zxvf beagle4_files.tar.gz?dl=0
- #cp beagle4_files/*.jar .
- #rm -r beagle4_files*
- exit
+exit
 fi
 
 ###################################################################
 # # Download PLINK from the web if not available
 if [ ! -f plink2 ]; then
-#wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
-#mv plink2\?dl\=0 plink2
-#chmod +x plink2
  echo " Please download plink version 2 and save the binary file as 'plink2' "
  exit
 fi
 
 #### Checking if beagle 4 jar file is available
 if [ ! -f beagle4n1.jar ]; then
- echo "  Beagle jar file is not available -- Place beagle4.jar in this folder  "
+ echo "  Beagle jar file is not available -- Place beagle4n1.jar in this folder  "
  echo " "
  echo " "
  exit
@@ -116,7 +109,7 @@ fi
 
 ## check the allele code
 #Allelecode=$(awk '{print $6}' ../${ref}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
-Allelecode=$(echo '12')
+Allelecode=$(echo $Allelecode)
 #####################################################################
 echo 'Data Preparation started for ........ BEAGLE Version 4'
 if [ $Allelecode = 12 ]; then
@@ -162,7 +155,7 @@ cat Afreqchr.txt | awk -v i=$i '{if ($1==i) print $2,$3,$4,$5}' > ${outref}chr$i
 rm Afreqchr.txt 
 
 ###################################################################################
-echo '*******************************************************************'
+echo '********************************************************************'
 echo '*******              beagle version 4.0 imputation          ********'
 echo '*******              chromosome' $i '...started !!!         ********'
 echo "*******                                                     ********"
@@ -170,7 +163,7 @@ echo "********************************************************************"
 
 nloci=$(awk 'END {print NR}' ${outref}chr$i.snplist)
 java -jar beagle2vcf.jar $i ${outref}chr$i.snplist ${outref}_chr$i.bgl 0 > ${outref}chr$i.vcf
-java -jar beagle4n1.jar gt=${outref}chr$i.vcf nthreads=10 niterations=50 window=20000 overlap=5000 ne=300 gprobs=true out=${finaloutfile}chr$i.phased
+java -jar beagle4n1.jar gt=${outref}chr$i.vcf nthreads=10 niterations=20 window=20000 overlap=5000 ne=300 gprobs=true out=${finaloutfile}chr$i.phased
 
 if [ ! -f ${finaloutfile}chr$i.phased.vcf.gz ]; then
  echo " Imputation with BEAGLE v4 aborted  "
@@ -243,10 +236,11 @@ elif [ ! $chrend -eq $chrst ]; then
  fam=$(awk 'NR<2 {print $3}' list)
  ./plink2 --silent --cow --nonfounders --allow-no-sex --bed $bed --bim $bim --fam $fam --merge-list merglist.txt --make-bed --out imp
  ./plink2 --silent --cow --nonfounders --allow-no-sex --bfile imp --make-bed --out ../${finaloutfile}_imp
+ rm imp.*
 fi
 
 #####################################
-rm -r list bed fam bim merglist.txt *.log *.nosex imp.*
+rm -r list bed fam bim merglist.txt *.log *.nosex
 cd ..
 rm *.nosex *.log *.jar
 cd ..
