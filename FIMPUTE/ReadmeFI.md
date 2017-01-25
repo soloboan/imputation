@@ -1,11 +1,7 @@
-# Readme file for running FImpute with the follwing bash script
+# Readme file for running FImpute 
 
-@******************************************************************@
-@      Parameter file description for runing FIMPUTE               @
-@******************************************************************@
-
-## NOTE -- VERY IMPORTANT
-There are two bash scripts
+## There are two bash scripts 
+Thes script could could be used for minor (sporadic missing, ungenotyped parents) and major imputation (from low density SNP panel to a high density panel)
 
 A.
 *******  FIminor.sh  *******    
