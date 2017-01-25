@@ -7,6 +7,7 @@ outval=$4
 finaloutfile=$5
 chrst=$6
 chrend=$7
+Allelecode=$8
 ###############################
 echo " "
 echo " "
@@ -34,7 +35,8 @@ if [ ${ref} = help ]; then
        4. output name of file to be imputed
        5. Output name of final file after imputation
        6. start of chromosome
-       7. End of chromosome"
+       7. End of chromosome
+       8. Allelecode either 12 or AB for data with 11/12/22 or AA/AB/BB "
 echo " "
 echo " "
  exit
@@ -44,10 +46,6 @@ fi
 if [ ! -f beagle4n1.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
  #echo "Beagle files were not found in the current directory, Downloading them ................"
  echo " Please download beagle version 4.1 "
- #wget https://www.dropbox.com/s/xfgyuvh9sdf1vx0/beagle4_files.tar.gz?dl=0
- #tar -zxvf beagle4_files.tar.gz?dl=0
- #cp beagle4_files/*.jar .
- #rm -r beagle4_files*
  exit
 fi
 
@@ -132,8 +130,8 @@ cd ${FOLDER}
 ## checking the allele code
 #Allelecode_ref=$(awk '{print $6}' ../${ref}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
 #Allelecode_val=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if ($1==1) print "12"; else if ($1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
-Allelecode_ref=$(echo '12')
-Allelecode_val=$(echo '12')
+Allelecode_ref=$(echo $Allelecode)
+Allelecode_val=$(echo $Allelecode)
 
 ##################################################################
 echo 'Data Preparation started for ........ BEAGLE Version 4'
