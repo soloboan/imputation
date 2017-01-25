@@ -37,7 +37,7 @@ if [ ${ref} = help ]; then
        5. Output name of final file after imputation
        6. Path to the directory where R-Rscript is located eg. /usr/bin/Rscript
        7. Format of output file (either in 'plink' or 'genoytpes')
-       8. $Allelecode - use 12 or AB if data is 11/12/22 or AB/AB/BB
+       8. Allelecode - use 12 or AB if data is 11/12/22 or AB/AB/BB
        9. Pedigree data (IID Sire Dam Sex) (optional) "
  echo " "
  echo " "
