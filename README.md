@@ -3,7 +3,6 @@ Genotype Imputation bash script for BEAGLE v3, v4 & v4.1 and FImpute software.
 The bash script uses PLINK format data and PLINK software itself to undertake most of the task.
 
 ## imputation with FImpute
-**Parameter file description for runing FIMPUTE**  
 
 There are two bash scripts  
 ### A. _FIminor.sh_   
@@ -45,8 +44,9 @@ The final out is a plink binary file with its prefix as argument and _imp
          The final out is a plink binary file with its prefix as argument and _imp  
 
 
-        Runing the Example files
-        *************************************************************************************
+           ********************************************************************************
+                        Running the Example files
+           ********************************************************************************
            Examples for minor imputation (FIminor.sh)  
             **without Pedigree information**  
               ./FIminor.sh Example/ex01_ref ref resultsREF plink 12 
@@ -68,61 +68,67 @@ The final out is a plink binary file with its prefix as argument and _imp
              imp7kto50k_imp.bim , imp7kto50k_imp.bed & imp7kto50k_imp.fam  
 
 
-## imputation with BEAGLEv4
+## imputation with BEAGLEv4 and BEAGLE v4.1
 
 There are two bash scripts  
-### A. _BGLminor.sh_  
+### A. _BGLminor.sh_ or _BGLminor4n1.sh_
 This is to run minor imputation on a (one) dataset with few markers missing for some individuals  
 
-### B. _BGLmajor.sh_  
+### B. _BGLmajor.sh_  or _BGLmajor4n1.sh_ 
 This is to run major imputation on two different SNP chips. (Eg. Impute 50k to HD or 7k to 50k etc)  
 
 Get help by runing the following: (The parameters needed to run the script will be printed out)  
 ./BGLminor.sh help  
 ./BGLmajor.sh help  
 
-* Running BGLminor.sh script to undertake MINOR imputation with BEAGLE version 4  
-5 Arguments are needed to run BGLminor.sh script  
-* Arguments  
- 1. Reference file (The file should be a PLINK binary file with alleles coded as 11-12-22 or AA-AB-BB)  
- 2. output name of Reference file  
- 3. Output name of final file after imputation  
- 4. start of chromosome  
- 5. End of chromosome  
-The final output is a plink binary file with its prefix as argument and suffix as _imp.bed, _imp.bim and _imp.fam.  
-We generate a folder called interMS-summary and this contains imputation per chromosomes and outher important output of BEAGLE
+### Running _BGLminor.sh_ or _BGLminor4n1.sh_ script to undertake MINOR imputation with BEAGLE v4 & v4.1 
+  6 Arguments are needed  
 
-* Running ./BGLmajor.sh script to undertake MAJOR imputation with BEAGLE version 4  
-7 Arguments are needed to run BGLmajor.sh scrip  
-*Arguments  
- 1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
- 2. output name of Reference file  
- 3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
- 4. output name of file to be imputed  
- 5. Output name of final file after imputation  
- 6. start of chromosome  
- 7. End of chromosome  
-The final output is a plink binary file with its prefix as argument and suffix as _imp.bed, _imp.bim and _imp.fam.  
-We generate a folder called interMS-summary and this contains imputation per chromosomes and outher important output of BEAGLE
+      ***** Arguments ******  
+        1. Reference file (The file should be a PLINK binary file with alleles coded as 11-12-22 or AA-AB-BB)  
+        2. output name of Reference file  
+        3. Output name of final file after imputation  
+        4. start of chromosome  
+        5. End of chromosome  
+        6. Allelecode
+        
+        The final output is a plink binary file with its prefix as argument and suffix as _imp.bed, _imp.bim and _imp.fam.  
+         We generate a folder called interMS-summary and this contains imputation per chromosomes and other important output of BEAGLE
 
 
-#### Runing the Example files
+### Running _./BGLmajor.sh_ or _./BGLmajor4n1.sh_ script to undertake MAJOR imputation with BEAGLE v4 & v4.1  
+8 Arguments are needed to run BGLmajor.sh scrip  
 
-##### Examples for minor imputation (BGLminor.sh)
-###### for one chromosomes
-./BGLminor.sh Example/ex01_ref ex01ref resultsREF 1 1
+      ***** Arguments ****** 
+        1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
+        2. output name of Reference file  
+        3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
+        4. output name of file to be imputed  
+        5. Output name of final file after imputation  
+        6. start of chromosome  
+        7. End of chromosome  
+        8. Allelecode
 
-###### for a range of chromosomes
-./BGLminor.sh Example/ex01_ref ex01ref resultsREF 25 29
+       The final output is a plink binary file with its prefix as argument and suffix as _imp.bed, _imp.bim and _imp.fam.  
+       We generate a folder called interMS-summary and this contains imputation per chromosomes and outher important output of BEAGLE
 
-###### for all chromosomes
-./BGLminor Example/ex01_ref ex01ref resultsREF 1 29
 
-**OUTPUT file-names**  
- * resultsREF_imp.bim  
- * resultsREF_imp.bed  
- * resultsREF_imp.fam  
-In addtion a folder with prefix interMS-summary will be generated and addiotnal results files stored
+           ********************************************************************************
+                              Running the Example files
+           ********************************************************************************
+              Examples for minor imputation (BGLminor.sh or BGLmajor4n1.sh)
+               for one chromosome ONLY
+                ./BGLminor.sh Example/ex01_ref ex01ref resultsREF 1 1 12
+
+              for a range of chromosomes
+               ./BGLminor.sh Example/ex01_ref ex01ref resultsREF 25 29
+
+              for all chromosomes
+               ./BGLminor Example/ex01_ref ex01ref resultsREF 1 29
+
+             **OUTPUT file-names**  
+                resultsREF_imp.bim, resultsREF_imp.bed & resultsREF_imp.fam 
+               In addtion a folder with prefix interMS-summary will be generated and addiotnal results files stored
 
 ##### Examples for minor imputation (BGLmajor.sh)
 ###### for one chromosomes
