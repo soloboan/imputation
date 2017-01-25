@@ -33,15 +33,15 @@ Get help by runing the following: (The parameters needed to run the script will 
 ### Running FImajor.sh script to undertake MAJOR imputation with FIMPUTE  
  * 9 Arguments are needed to run FImajor.sh script  
 
-       ***** Arguments ******   
+       ***** Arguments ******     
          1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
          2. output name of Reference file  
          3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
          4. output name of file to be imputed  
          5. Output name of final file after imputation  
          6. where R is located  
-         7. Output genotype format (either plink or genotype format)
-         8. Allelecode
+         7. Output genotype format (either plink or genotype format)  
+         8. Allelecode  
          9. Pedigree information (is "Optional" -- if provided, it should have 4 columns -- Progeny, Sire, Dam, Sex)  
          
          The final out is a plink binary file with its prefix as argument and _imp  
