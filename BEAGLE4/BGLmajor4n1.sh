@@ -61,7 +61,7 @@ fi
 
 #### Checking if beagle 4 jar file is available
 if [ ! -f beagle4n1.jar ]; then
- echo "  Beagle jar file is not available -- Place beagle4new.jar in this folder  "
+ echo "  Beagle jar file is not available -- Place beagle4n1.jar in this folder  "
  echo " "
  echo " "
  exit
