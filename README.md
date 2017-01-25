@@ -15,11 +15,11 @@ Get help by runing the following: (The parameters needed to run the script will 
 ./FIminor.sh help  
 ./FImajor.sh help  
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
-### Running the FIminor.sh script to undertake MINOR imputation with FIMPUTE 
+
+### Running the FIminor.sh script to undertake MINOR imputation with FIMPUTE   
 * 6 Arguments are needed to run FIminor.sh script  
 
-       ***** Arguments ****** 
+       ***** Arguments ******   
           1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
           2. output name of Reference file  
           3. Output name of final file after imputation  
@@ -30,10 +30,10 @@ Get help by runing the following: (The parameters needed to run the script will 
           The final out is a plink binary file with its prefix as argument and _imp  
 
 
-### Running FImajor.sh script to undertake MAJOR imputation with FIMPUTE
+### Running FImajor.sh script to undertake MAJOR imputation with FIMPUTE  
  * 9 Arguments are needed to run FImajor.sh script  
 
-       ***** Arguments ****** 
+       ***** Arguments ******   
          1. Reference file (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
          2. output name of Reference file  
          3. The file to be imputed (The file should be a PLINK binary file with alleles coded as 11, 12, 22)  
