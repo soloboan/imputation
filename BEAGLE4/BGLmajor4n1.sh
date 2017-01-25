@@ -44,7 +44,7 @@ fi
 
 # Download beagle from the web if not available
 if [ ! -f beagle4n1.jar ] || [ ! -f beagle2vcf.jar ] || [ ! -f vcf2beagle.jar ]  || [ ! -f vcf2gprobs.jar ] || [ ! -f gprobsmetrics.jar ] || [ ! -f conform-gt.jar ]; then
- #echo "Beagle files were not found in the current directory, Downloading them ................"
+ echo "Beagle files were not found in the current directory ........"
  echo " Please download beagle version 4.1 "
  exit
 fi
@@ -52,9 +52,6 @@ fi
 ###################################################################
 # # Download PLINK from the web if not available
 if [ ! -f plink2 ]; then
-#wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
-#mv plink2\?dl\=0 plink2
-#chmod +x plink2
  echo " Please download plink version 2 and save the binary file as 'plink2' "
  exit
 fi
@@ -234,7 +231,7 @@ if [ ! -f ${outref}chr$i.phased.vcf.gz ]; then
 fi
  echo " "
  echo '************************************************************************'
- echo "*********         Imputing lower denisty SNP panel              ********"
+ echo "*********         Imputing lower density SNP panel              ********"
  echo "*********            chromosome' $i '...started !!!             ********"
  echo "************************************************************************"
 #**** VAL
