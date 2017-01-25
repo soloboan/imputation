@@ -7,7 +7,8 @@ outval=$4
 finaloutfile=$5
 RDIR=$6
 outformat=$7
-Pedigree=$8
+Allelecode=$8
+Pedigree=$9
 ###############################
 echo " "
 echo " "
@@ -36,7 +37,8 @@ if [ ${ref} = help ]; then
        5. Output name of final file after imputation
        6. Path to the directory where R-Rscript is located eg. /usr/bin/Rscript
        7. Format of output file (either in 'plink' or 'genoytpes')
-       8. Pedigree data (IID Sire Dam Sex) (optional) "
+       8. $Allelecode - use 12 or AB if data is 11/12/22 or AB/AB/BB
+       9. Pedigree data (IID Sire Dam Sex) (optional) "
  echo " "
  echo " "
  exit
@@ -45,29 +47,10 @@ fi
 ###################################################################
 # # Download PLINK from the web if not available
 if [ ! -f plink2 ]; then
-wget https://www.dropbox.com/s/e3igtqgwpwmd0di/plink2?dl=0
-mv plink2\?dl\=0 plink2
-chmod +x plink2
+echo 'Please - Download plink v2 and rename it to plink2'
+exit
 fi
 
-#if [ ! -f plink ]; then
-# echo "plink was not found in the current directory, thus it been download"
-# echo " "
-# wget http://pngu.mgh.harvard.edu/~purcell/plink/dist/plink-1.07-x86_64.zip
-# unzip plink-1.07-x86_64.zip
-# cp plink-1.07-x86_64/plink .
-# ./plink --noweb --silent --file plink-1.07-x86_64/test 
-# rm -r plink-1.07-x86_64*
-# if [ ! -f plink.log ]; then
-#  wget http://pngu.mgh.harvard.edu/~purcell/plink/dist/plink-1.07-i686.zip
-#  unzip plink-1.07-i686.zip
-# cp plink-1.07-i686/plink .
-#  rm -r plink-1.07-i686*
-#  echo " "
-# fi
-#rm plink.log
-#echo " "
-#fi
 
 # Download FImpute from the web if not available
 if [ ! -f FImpute ]; then
@@ -137,7 +120,7 @@ echo " "
 echo "****    Data processing for imputation started     ****"
 #Allelecode_ref=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
 
-Allelecode_ref=$(echo '12')
+Allelecode_ref=$(echo $Allelecode)
 #####  REFERENCE  #######
 if [ $Allelecode_ref = 12 ]; then
  cat ../${ref}.bim | awk '{print $2,2}' > recodeallele.txt
@@ -175,7 +158,7 @@ rm ref_upd.*
 
 ##### VALIDATION  #######
 #Allelecode_val=$(awk '{print $6}' ../${val}.bim | sort | uniq | awk '{if($1!=0) print}' | awk 'NR==1 {if ($1==1 || $1==2) print "12"; else if ($1=="A" || $1=="B") print "AB"; else if($1=="G" || $1=="T" || $1=="C") print "ACGT"}')
-Allelecode_val=$(echo '12')
+Allelecode_val=$(echo $Allelecode)
 
 if [ $Allelecode_val = 12 ]; then
 cat ../${val}.bim | awk '{print $2,2}' > recodeallele.txt
@@ -319,14 +302,14 @@ cat $outref.snpinfo | awk 'NR>1 {print $2,$1,0,$3}' > file.map
 rm ids.txt geno
 
 if [ $Allelecode_ref = 12 ]; then
- ./plink2 --silent --cow --nonfounders --file file --make-bed --out ${finaloutfile}_imp
- ./plink2 --silent --cow --nonfounders --bfile ${finaloutfile}_imp --make-bed --out ${finaloutfile}_imp
-rm file.map file.ped
+ ./plink2 --silent --cow --nonfounders --file file --make-bed --out imp
+ ./plink2 --silent --cow --nonfounders --bfile imp --make-bed --out ${finaloutfile}_imp
+rm file.map file.ped imp.*
 elif [ $Allelecode_ref = AB ]; then
  cat ../${ref}.bim | awk '{print $2,1,2,"A","B"}' > alleleupdate.txt
- ./plink2 --silent --cow --nonfounders --file file --update-alleles alleleupdate.txt --make-bed --out ${finaloutfile}_imp
- ./plink2 --silent --cow --nonfounders --bfile ${finaloutfile}_imp --make-bed --out ${finaloutfile}_imp
-rm alleleupdate.txt file.map file.ped
+ ./plink2 --silent --cow --nonfounders --file file --update-alleles alleleupdate.txt --make-bed --out imp
+ ./plink2 --silent --cow --nonfounders --bfile imp --make-bed --out ${finaloutfile}_imp
+rm alleleupdate.txt file.map file.ped imp.*
 fi
 
 #******** Extract the imputed ungenotyped animals and make a PLINK file ***********#
@@ -339,14 +322,14 @@ if [ -f ${finaloutfile}/genotypes_imp_chip0.txt ]; then
  cat $outref.snpinfo | awk 'NR>1 {print $2,$1,0,$3}' > file.map
  rm ids.txt geno
  if [ $Allelecode_ref = 12 ]; then
-  ./plink2 --silent --cow --nonfounders --file file --make-bed --out ${finaloutfile}_ungenoimp
-  ./plink2 --silent --cow --nonfounders --bfile ${finaloutfile}_ungenoimp --make-bed --out ${finaloutfile}_ungenoimp
- rm file.map file.ped
+  ./plink2 --silent --cow --nonfounders --file file --make-bed --out ungenoimp
+  ./plink2 --silent --cow --nonfounders --bfile ungenoimp --make-bed --out ${finaloutfile}_ungenoimp
+ rm file.map file.ped ungenoimp.*
  elif [ $Allelecode_ref = AB ]; then
   cat ../${ref}.bim | awk '{print $2,1,2,"A","B"}' > alleleupdate.txt
-  ./plink2 --silent --cow --nonfounders --file file --update-alleles alleleupdate.txt --make-bed --out ${finaloutfile}_ungenoimp
-  ./plink2 --silent --cow --nonfounders --bfile ${finaloutfile}_ungenoimp --make-bed --out ${finaloutfile}_ungenoimp
- rm alleleupdate.txt file.map file.ped
+  ./plink2 --silent --cow --nonfounders --file file --update-alleles alleleupdate.txt --make-bed --out ungenoimp
+  ./plink2 --silent --cow --nonfounders --bfile ungenoimp --make-bed --out ${finaloutfile}_ungenoimp
+ rm alleleupdate.txt file.map file.ped ungenoimp.*
 fi
 fi
 
